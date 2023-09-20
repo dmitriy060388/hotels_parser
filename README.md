@@ -1,1 +1,1 @@
-# hotels_parsers_2_selenium
+# hotels_parser
