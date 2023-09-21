@@ -1,6 +1,5 @@
 import undetected_chromedriver as uc
 
-
 class BaseClass:
 
     def __init__(self) -> None:
@@ -8,5 +7,6 @@ class BaseClass:
         driver.maximize_window()
         url = "https://travel.mts.ru/"
         driver.get(url)
+
 
 client = BaseClass()
