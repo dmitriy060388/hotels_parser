@@ -16,8 +16,17 @@ class Parser(BaseClass):
         self.driver.get(self.url)
 
 
-client = Parser()
-client._find_element(MainPageLocators.MAIN_PAGE)
-client._click_visible_element(MainPageLocators.PLACE)
-client._send_keys(MainPageLocators.PLACE, list_of_hotels.hotels[0])
-time.sleep(150)
+if __name__ == '__main__':
+    client = Parser()
+    client._find_element(MainPageLocators.MAIN_PAGE)
+    client._click_visible_element(MainPageLocators.PLACE)
+    client._send_keys(MainPageLocators.PLACE, list_of_hotels.hotels[0])
+    client._wait_visible_element(
+        MainPageLocators.LOCATION(list_of_hotels.hotels[0])
+    )
+    client._click_clickable_element(
+        MainPageLocators.LOCATION(list_of_hotels.hotels[0])
+    )
+    client._click_visible_element(MainPageLocators.DATE)
+
+    time.sleep(150)
