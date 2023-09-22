@@ -8,3 +8,5 @@ class MainPageLocators:
     DATE = (By.XPATH, '//input[@data-test="search_date_field"]')
     NUMBER_OF_PEOPLE = (By.XPATH, '//div[@data-test="accommodation_field"]')
     SEARCH = (By.XPATH, '//button[@data-test="search_button"]')
+
+    LOCATION = lambda x: (By.XPATH, '//div[contains(text(), "{}")]'.format(x)) # noqa
