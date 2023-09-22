@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPage:
+class MainPageLocators:
 
     MAIN_PAGE = (By.XPATH, '//body[@class="antialiased"]')
     PLACE = (By.XPATH, '//input[@data-test="search_place"]')
