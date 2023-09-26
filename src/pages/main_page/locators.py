@@ -6,6 +6,12 @@ class MainPageLocators:
     MAIN_PAGE = (By.XPATH, '//body[@class="antialiased"]')
     PLACE = (By.XPATH, '//input[@data-test="search_place"]')
     DATE = (By.XPATH, '//input[@data-test="search_date_field"]')
+    CURRENT_DAY = lambda x: ( # noqa
+        By.XPATH, '//div[@data-test="days_pick"]//button[@data-test="{}"]'.format(x)
+    )
+    NEXT_DAY = lambda x: ( # noqa
+        By.XPATH, '//div[@data-test="days_pick"]//button[@data-test="{}"]'.format(x)
+    )
     NUMBER_OF_PEOPLE = (By.XPATH, '//div[@data-test="accommodation_field"]')
     SEARCH = (By.XPATH, '//button[@data-test="search_button"]')
 
