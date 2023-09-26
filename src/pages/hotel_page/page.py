@@ -5,7 +5,7 @@ from selenium.common.exceptions import TimeoutException
 
 class HotelPage(BaseClass):
 
-    def choose_hotel(self):
+    def parse_data(self):
 
         # Проверка на наличие предложений с отелями
         try:
@@ -15,3 +15,13 @@ class HotelPage(BaseClass):
             raise TimeoutException("Ошибка - {}".format(error))
 
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
+        rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
+        rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME)
+        rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+
+        # Все цены
+        for x in rooms_price:
+            print(str(x.text))
+        # Типы номеров
+        for x in rooms_card:
+            print(str(x.text))

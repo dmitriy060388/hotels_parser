@@ -1,19 +1,21 @@
 import undetected_chromedriver as uc
 import time
 
-from pages.base import BaseClass
 from pages.main_page.page import MainPage
 from pages.hotel_page.page import HotelPage
-from pages.main_page.locators import MainPageLocators
 from requirements import list_of_hotels
 
 
 class Cosmos(MainPage, HotelPage):
     pass
+
+
 x = Cosmos()
 x.search_hotel(list_of_hotels.hotels[0], list_of_hotels.hotels[0])
-x.choose_hotel()
+x.parse_data()
 time.sleep(25)
+
+
 
 
 
