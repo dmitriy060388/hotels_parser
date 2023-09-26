@@ -8,7 +8,7 @@ from requirements import list_of_hotels
 
 
 x = MainPage()
-x.search_hotel()
+x.search_hotel(list_of_hotels.hotels[0], list_of_hotels.hotels[0])
 
 
 
