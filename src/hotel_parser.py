@@ -3,12 +3,17 @@ import time
 
 from pages.base import BaseClass
 from pages.main_page.page import MainPage
+from pages.hotel_page.page import HotelPage
 from pages.main_page.locators import MainPageLocators
 from requirements import list_of_hotels
 
 
-x = MainPage()
+class Cosmos(MainPage, HotelPage):
+    pass
+x = Cosmos()
 x.search_hotel(list_of_hotels.hotels[0], list_of_hotels.hotels[0])
+x.choose_hotel()
+time.sleep(25)
 
 
 
@@ -16,6 +21,10 @@ x.search_hotel(list_of_hotels.hotels[0], list_of_hotels.hotels[0])
 @property
 def main_page(self):
     return MainPage(self.driver)
+
+@property
+def hotel_page(self):
+    return HotelPage(self.driver)
 
 
 # class Parser(BaseClass):

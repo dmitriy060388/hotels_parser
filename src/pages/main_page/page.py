@@ -2,7 +2,6 @@ from pages.base import BaseClass
 from .locators import MainPageLocators
 # from requirements import list_of_hotels
 import datetime
-import time
 
 
 class MainPage(BaseClass):
@@ -29,4 +28,3 @@ class MainPage(BaseClass):
         self._click_visible_element(MainPageLocators.CURRENT_DAY(self.current_date))
         self._click_visible_element(MainPageLocators.NEXT_DAY(self.next_date))
         self._click_visible_element(MainPageLocators.SEARCH)
-        time.sleep(100)
