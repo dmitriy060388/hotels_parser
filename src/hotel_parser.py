@@ -6,13 +6,20 @@ from pages.hotel_page.page import HotelPage
 from requirements import list_of_hotels
 
 
-class Cosmos(MainPage, HotelPage):
-    pass
+class Parser(MainPage, HotelPage):
+
+    def __init__(self, hotel_name):
+        self.hotel_name = hotel_name
+        self.driver = uc.Chrome(headless=False)
+        self.driver.maximize_window()
+        self.driver.delete_all_cookies()
+        self.url = "https://travel.mts.ru/"
+        self.driver.get(self.url)
 
 
-x = Cosmos()
-x.search_hotel(list_of_hotels.hotels[0], list_of_hotels.hotels[0])
-x.parse_data()
+cosmos = Parser(list_of_hotels.hotels[0])
+cosmos.search_hotel(list_of_hotels.hotels[0], list_of_hotels.hotels[0])
+cosmos.parse_data()
 time.sleep(25)
 
 
