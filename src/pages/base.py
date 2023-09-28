@@ -2,9 +2,17 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+import undetected_chromedriver as uc
 
 
 class BaseClass:
+
+    # def __init__(self, driver):
+    #     self.driver = uc.Chrome(headless=False)
+    #     self.driver.maximize_window()
+    #     self.driver.delete_all_cookies()
+    #     self.url = "https://travel.mts.ru/"
+    #     self.driver.get(self.url)
 
     def _right_click(self, element) -> None:
         action = ActionChains(self.driver)
