@@ -75,3 +75,6 @@ class BaseClass:
             ec.element_to_be_clickable(locator),
             message="Not visibility element {}".format(locator)
         ).click()
+
+    def _refresh_page(self):
+        self.driver.refresh

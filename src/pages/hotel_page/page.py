@@ -1,8 +1,8 @@
 from pages.base import BaseClass
+from pages.main_page.page import MainPage
 from .locators import HotelPageLocators
 from selenium.common.exceptions import TimeoutException
-
-import csv
+import time
 
 
 class HotelPage(BaseClass):
@@ -27,3 +27,16 @@ class HotelPage(BaseClass):
         # Типы номеров
         for x in rooms_card:
             print(str(x.text))
+
+    # def save_data(self):
+    #     with open(f'savedata/data_result'
+    #               f'{MainPage.current_date} {MainPage.next_date}.csv',
+    #               'a', newline='') as file:
+    #         """открывем файл на дозапись
+    #         (иначе перезатрём данные из цикла)"""
+    #         self.writer = csv.writer(file, delimiter=' ')
+    #         """сохраняем результат
+    #         функции writer в переменную"""
+    #         self.writer.writerow([rooms_card])
+    #         self.writer.writerow([rooms_price])
+    #         # self.writer.writerow([eat])
