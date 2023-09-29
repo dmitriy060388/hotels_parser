@@ -2,6 +2,8 @@ from pages.base import BaseClass
 from .locators import HotelPageLocators
 from selenium.common.exceptions import TimeoutException
 
+import csv
+
 
 class HotelPage(BaseClass):
 

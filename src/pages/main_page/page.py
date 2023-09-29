@@ -1,22 +1,13 @@
 from pages.base import BaseClass
 from .locators import MainPageLocators
-# from requirements import list_of_hotels
-import datetime
+from utils.days_generator import DaysGenerator
 
 
 class MainPage(BaseClass):
 
     def search_hotel(self, hotel, data):
-        self.current_date = datetime.date.today()
-        self.delta_date = datetime.timedelta(
-            days=1
-            )
-        self.time = (datetime.datetime.now(
-            datetime.timezone.utc
-            ) + self.delta_date)
-        self.next_date = self.time.strftime(
-            "%Y-%m-%d"
-            )
+        DaysGenerator.one_day_generate(self)
+
         self.hotel = hotel
         self.data = data
 
