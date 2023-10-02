@@ -10,15 +10,17 @@ class HotelPage(BaseClass):
     def parse_data(self):
 
         # Проверка на наличие предложений с отелями
-        try:
-            self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
-        except TimeoutException:
-            error = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
-            raise TimeoutException("Ошибка - {}".format(error))
+        self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
 
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
         rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
-        rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME)
+        try:
+            rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME)
+        except TimeoutException:
+            error = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
+            raise TimeoutException(
+                "Номера в отеле не найдены, {}".format(error)
+            )
         rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
 
         # Все цены
