@@ -13,22 +13,20 @@ class HotelPage(BaseClass):
         self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
 
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
-        rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
         try:
+            rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
             rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME)
-        except TimeoutException:
-            error = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
-            raise TimeoutException(
-                "Номера в отеле не найдены, {}".format(error)
-            )
-        rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+            rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+            # Все цены
+            for x in rooms_price:
+                print(str(x.text))
+            # Типы номеров
+            for x in rooms_card:
+                print(str(x.text))
+        except:
+            result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
+            print(result)
 
-        # Все цены
-        for x in rooms_price:
-            print(str(x.text))
-        # Типы номеров
-        for x in rooms_card:
-            print(str(x.text))
 
     # def save_data(self):
     #     with open(f'savedata/data_result'
