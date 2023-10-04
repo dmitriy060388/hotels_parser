@@ -19,3 +19,31 @@ print('yeah2')
 #норм cursor.fetchone()
 cursor.close()
 conn.close()
+
+
+
+#table_insert(conn, "mts_scheme", "result", '3', 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
+
+def table_insert(dbcon, scheme_name, table_name, dbid, hotel_name, hotel_date, price, category, eat, logdb):
+    try:
+        cur = dbcon.cursor()
+        cur.execute(
+            sql.SQL("insert into {scheme}.{table} (id, hotel_name, date, price, category, breakfast) VALUES ({id}, {hname}, {date}, {price}, {category}, {eat});").format(
+            scheme=sql.Identifier(scheme_name),
+            table=sql.Identifier(table_name),
+            id=sql.Identifier(dbid),
+            hname=sql.Identifier(hotel_name),
+            date=sql.Identifier(hotel_date),
+            price=sql.Identifier(price),
+            category=sql.Identifier(category),
+            eat=sql.Identifier(eat)))
+    except psycopg2.Error as e:
+            if logdb == "DEBUG":
+                print (e)
+    return
+
+
+#scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
+#table_init(conn, "mts_scheme", "result", LOGGING)
+#table_insert(conn, "mts_scheme", "result", '1', 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
+#table_insert(conn, "mts_scheme", "result", '2', 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
