@@ -27,7 +27,7 @@ while x != 0:
         parser.parse_data()
         time.sleep(5)
         parser.close_browser()
-    time.sleep(30)
+    time.sleep(15)
     x -= 1
 
 

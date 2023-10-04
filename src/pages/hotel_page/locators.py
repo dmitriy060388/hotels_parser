@@ -7,5 +7,6 @@ class HotelPageLocators:
                     '"select_rooms"]')
     HOTEL_NOT_FOUND = (By.XPATH, '//div[@data-test="hotels_title"]')
     ROOMS_LIST = (By.XPATH, '//section[@id="rooms"]')
-    ROOM_NAME = (By.XPATH, '//div[@data-test="room_name"]/h3')
+    ROOM_NAME1 = (By.XPATH, '//div[@data-test="room_name"]/h3')
+    ROOM_NAME2 = (By.XPATH, '//p[@data-test="room_name"]')
     ROOM_PRICE = (By.XPATH, '//p[@data-test="price"]')
