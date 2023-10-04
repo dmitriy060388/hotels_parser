@@ -9,12 +9,16 @@ conn.autocommit = True
 #def psinsert(dbcon, id, hotel_name, date, price, category, breakfast)
 
 
-def check_existence(dbcon, schema_name, table_str):
+def check_existence(dbcon, table_str):
 #    table_str = "results"
     exists = False
     try:
         cur = dbcon.cursor()
-        cur.execute("select exists(select * from mts_scheme where table_name=%s)", (table_str,))
+        psqlexec = "select exists(select * from mts_test1.mts_scheme where table_name= %s)"
+        psqldata = (table_str,)
+#       cur.execute("select exists(select * from mts_scheme where table_name=%s)", (table_str,))
+#        cur.execute("select exists(select * from %s where table_name= %s)", (schema_name, table_str,))
+        cur.execute(psqlexec, psqldata)
         cur.fetchone()[0]
         print ("exists")
         cur.close()
@@ -23,4 +27,5 @@ def check_existence(dbcon, schema_name, table_str):
         print (e)
     return exists
 
-table_exists(conn, "results")
+check_existence(conn, "result")
+#def table_exists(conn, "results")
