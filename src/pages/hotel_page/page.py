@@ -17,12 +17,18 @@ class HotelPage(BaseClass):
             rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
             rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME)
             rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+            scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
+            table_init(conn, "mts_scheme", "result", LOGGING)
+            tabmaxid=table_check_last_id(conn, "mts_scheme", "result") + 1
             # Все цены
             for x in rooms_price:
                 print(str(x.text))
             # Типы номеров
             for x in rooms_card:
                 print(str(x.text))
+            for x in rooms_price:
+                tabmaxid=tabmaxid + 1 + x
+                table_insert(conn, "mts_scheme", "result", tabmaxid, rooms_card[x], NULL, rooms_price[x], NULL, NULL, LOGGING)
         except:
             result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
             print(result)
