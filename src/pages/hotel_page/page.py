@@ -47,7 +47,7 @@ class HotelPage(BaseClass):
                 print(str(x.text))
             for x in rooms_price: #1
                 tabmaxid=tabmaxid + 1 + x #1
-                table_insert(conn, "mts_scheme", "result", tabmaxid, rooms_card[x], NULL, rooms_price[x], NULL, NULL, LOGGING) #1
+                table_insert(conn, "mts_scheme", "result", tabmaxid, rooms_card[x], 'NULL', rooms_price[x], 'NULL', 'NULL', LOGGING) #1
         except:
             result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
             print(result)
