@@ -29,7 +29,12 @@ class HotelPage(BaseClass):
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
         try:
             rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
-            rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME)
+            # import pdb; pdb.set_trace()
+            if self._find_elements(HotelPageLocators.ROOM_NAME1):
+                rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
+            else:
+                rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME2)
+            # rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
             rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
             scheme_init(conn, "mts_scheme", DBUSER, LOGGING) #1
             table_init(conn, "mts_scheme", "result", LOGGING) #1
@@ -46,17 +51,3 @@ class HotelPage(BaseClass):
         except:
             result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
             print(result)
-
-
-    # def save_data(self):
-    #     with open(f'savedata/data_result'
-    #               f'{MainPage.current_date} {MainPage.next_date}.csv',
-    #               'a', newline='') as file:
-    #         """открывем файл на дозапись
-    #         (иначе перезатрём данные из цикла)"""
-    #         self.writer = csv.writer(file, delimiter=' ')
-    #         """сохраняем результат
-    #         функции writer в переменную"""
-    #         self.writer.writerow([rooms_card])
-    #         self.writer.writerow([rooms_price])
-    #         # self.writer.writerow([eat])
