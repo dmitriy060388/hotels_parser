@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import sql
-from src.pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING
+from pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING
 
 # DBNAME='mts_test_1'
 # DBUSER='postgres'
