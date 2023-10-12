@@ -4,7 +4,6 @@ from .locators import HotelPageLocators
 from selenium.common.exceptions import TimeoutException
 import time
 
-
 class HotelPage(BaseClass):
 
     def parse_data(self):
@@ -23,7 +22,16 @@ class HotelPage(BaseClass):
                 # Типы номеров
                 for y in rooms_card:
                     print(str(y.text))
+                return rooms_card, rooms_price
             print(x)
+            # rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
+            rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+            # Все цены
+            for x in rooms_price:
+                print(str(x.text))
+            # Типы номеров
+            for x in rooms_card:
+                print(str(x.text))
         except:
             result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
             print(result)

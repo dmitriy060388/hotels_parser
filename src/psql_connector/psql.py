@@ -1,12 +1,13 @@
 import psycopg2
 from psycopg2 import sql
+from pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING
 
-DBNAME='mts_test_1'
-DBUSER='postgres'
-DBPASSWORD='P@ssw0rd!'
-DBHOST='localhost'
-DBPORT='5432'
-LOGGING = "DEBUG" # состояния: ERROR, DEBUG. В состоянии DEBUG в терминал будет попадать вывод из postgres
+# DBNAME='mts_test_1'
+# DBUSER='postgres'
+# DBPASSWORD='P@ssw0rd!'
+# DBHOST='localhost'
+# DBPORT='5432'
+# LOGGING = "DEBUG" # состояния: ERROR, DEBUG. В состоянии DEBUG в терминал будет попадать вывод из postgres
 
 conn = psycopg2.connect(dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT)
 conn.autocommit = True
@@ -64,9 +65,9 @@ def table_check_last_id(dbcon, scheme_name, table_name):
     return last_id
 
 
-scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
-table_init(conn, "mts_scheme", "result", LOGGING)
-maxid=table_check_last_id(conn, "mts_scheme", "result") + 1
-table_insert(conn, "mts_scheme", "result", maxid, 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
+# scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
+# table_init(conn, "mts_scheme", "result", LOGGING)
+# maxid=table_check_last_id(conn, "mts_scheme", "result") + 1
+# table_insert(conn, "mts_scheme", "result", maxid, 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
 
 
