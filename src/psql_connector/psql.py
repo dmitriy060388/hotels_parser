@@ -60,11 +60,9 @@ def table_check_last_id(dbcon, scheme_name, table_name):
         cur.execute("select id from mts_scheme.result order by id desc limit 1")
         answer = cur.fetchone()
         if answer is not None:
-            print("not none!")
             last_id = int(cur.fetchone()[0])
         else:
             last_id = 1
-            print("none!")
     except psycopg2.Error as e:
             if logdb == "DEBUG":
                 print (e)
