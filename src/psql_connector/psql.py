@@ -65,9 +65,9 @@ def table_check_last_id(dbcon, scheme_name, table_name):
     return last_id
 
 
-scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
-table_init(conn, "mts_scheme", "result", LOGGING)
-maxid=table_check_last_id(conn, "mts_scheme", "result") + 1
-table_insert(conn, "mts_scheme", "result", maxid, 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
+# scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
+# table_init(conn, "mts_scheme", "result", LOGGING)
+# maxid=table_check_last_id(conn, "mts_scheme", "result") + 1
+# table_insert(conn, "mts_scheme", "result", maxid, 'pavelyaga', '2023-12-31', '1200', 'standard', '1', LOGGING)
 
 
