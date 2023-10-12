@@ -8,13 +8,7 @@ from psycopg2 import sql #1
 from src.psql_connector.psql import scheme_init #1
 from src.psql_connector.psql import table_init #1
 from src.psql_connector.psql import table_insert #1
-
-DBNAME='mts_test_1' #1
-DBUSER='postgres' #1
-DBPASSWORD='P@ssw0rd!' #1
-DBHOST='localhost' #1
-DBPORT='5432' #1
-LOGGING = "DEBUG" # состояния: ERROR, DEBUG. В состоянии DEBUG в терминал будет попадать вывод из postgres #1
+from src.psql_connector.psql import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING
 
 conn = psycopg2.connect(dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT) #1
 conn.autocommit = True #1
