@@ -10,3 +10,6 @@ class HotelPageLocators:
     ROOM_NAME1 = (By.XPATH, '//div[@data-test="room_name"]/h3')
     ROOM_NAME2 = (By.XPATH, '//p[@data-test="room_name"]')
     ROOM_PRICE = (By.XPATH, '//p[@data-test="price"]')
+    BUTTON_ROOM = (By.XPATH, '//button[@data-test="book_room"]')
+    # #1d2023 - black button
+    # #ff0032 - red button

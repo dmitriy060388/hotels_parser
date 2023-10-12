@@ -19,6 +19,7 @@ class Parser(MainPage, HotelPage):
     def close_browser(self):
         self.driver.quit()
 
+
 x = 10
 while x != 0:
     for i in range(len(hotels)):
@@ -27,8 +28,9 @@ while x != 0:
         parser.parse_data()
         time.sleep(5)
         parser.close_browser()
+        x -= 1
     time.sleep(15)
-    x -= 1
+
 
 
 @property
