@@ -32,7 +32,7 @@ def table_init(dbcon, scheme_name, create_table_name, logdb):
     try:
         cur = dbcon.cursor()
         cur.execute(
-            sql.SQL("create table if not exists {scheme}.{table} (id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, hotel_name VARCHAR(200), date DATE, price INT, category VARCHAR(128), breakfast BOOLEAN);").format(
+            sql.SQL("create table if not exists {scheme}.{table} (id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, hotel_name VARCHAR(200), date DATE, price INT, category VARCHAR(128), breakfast VARCHAR(200));").format(
             scheme=sql.Identifier(scheme_name),
             table=sql.Identifier(create_table_name)))
         if logdb == "DEBUG":
@@ -58,7 +58,13 @@ def table_check_last_id(dbcon, scheme_name, table_name):
     try:
         cur = dbcon.cursor()
         cur.execute("select id from mts_scheme.result order by id desc limit 1")
-        last_id = int(cur.fetchone()[0])
+        answer = cur.fetchone()
+        if answer is not None:
+            print("not none!")
+            last_id = int(cur.fetchone()[0])
+        else:
+            last_id = 1
+            print("none!")
     except psycopg2.Error as e:
             if logdb == "DEBUG":
                 print (e)
