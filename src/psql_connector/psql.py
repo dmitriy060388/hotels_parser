@@ -1,12 +1,13 @@
 import psycopg2
 from psycopg2 import sql
+from src.pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING
 
-DBNAME='mts_test_1'
-DBUSER='postgres'
-DBPASSWORD='P@ssw0rd!'
-DBHOST='localhost'
-DBPORT='5432'
-LOGGING = "DEBUG" # состояния: ERROR, DEBUG. В состоянии DEBUG в терминал будет попадать вывод из postgres
+# DBNAME='mts_test_1'
+# DBUSER='postgres'
+# DBPASSWORD='P@ssw0rd!'
+# DBHOST='localhost'
+# DBPORT='5432'
+# LOGGING = "DEBUG" # состояния: ERROR, DEBUG. В состоянии DEBUG в терминал будет попадать вывод из postgres
 
 conn = psycopg2.connect(dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT)
 conn.autocommit = True
