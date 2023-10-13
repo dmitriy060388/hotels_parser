@@ -57,7 +57,11 @@ def table_insert(dbcon, scheme_name, table_name, dbid, hotel_name, hotel_date, p
 def table_check_last_id(dbcon, scheme_name, table_name):
     try:
         cur = dbcon.cursor()
-        cur.execute("select id from mts_scheme.result order by id desc limit 1")
+        # cur.execute("select id from mts_scheme.result order by id desc limit 1")
+        cur.execute(
+            sql.SQL("select id from {scheme}.{table} order by id desc limit 1").format(
+                 scheme=sql.Identifier(scheme_name),
+                 table=sql.Identifier(table_name)))
         answer = cur.fetchone()
         if answer is not None:
             last_id = int(cur.fetchone()[0])
