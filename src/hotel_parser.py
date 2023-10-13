@@ -10,7 +10,7 @@ from psycopg2 import sql #1
 from psql_connector.psql import scheme_init #1
 from psql_connector.psql import table_init #1
 from psql_connector.psql import table_insert #1
-from psql_connector.psql import table_check_last_id #1
+# from psql_connector.psql import table_check_last_id #1
 from pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING #1
 
 conn = psycopg2.connect(dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT) #1
@@ -32,7 +32,8 @@ class Parser(MainPage, HotelPage):
 
 scheme_init(conn, "mts_scheme", DBUSER, LOGGING) #1
 table_init(conn, "mts_scheme", "result", LOGGING) #1
-tabmaxid = table_check_last_id(conn, "mts_scheme", "result") + 1 #1
+# print(table_check_last_id(conn, "mts_scheme", "result"))
+# tabmaxid = table_check_last_id(conn, "mts_scheme", "result") + 1 #1
 x = 10
 while x != 0:
     for i in range(len(hotels)):
@@ -41,14 +42,12 @@ while x != 0:
         y = parser.parse_data()
         print('****', y)
         print(type(y))
-        tabmaxid=tabmaxid + 1 #1
-        table_insert(conn, "mts_scheme", "result", tabmaxid, y, '2023-10-13', y, 'NULL', 'NULL', LOGGING) #1
+        # tabmaxid=tabmaxid + 1 #1
+        table_insert(conn, "mts_scheme", "result", y, '2023-10-13', y, 'NULL', 'NULL', LOGGING) #1
         time.sleep(5)
         parser.close_browser()
         x -= 1
     time.sleep(15)
-
-
 
 @property
 def main_page(self):

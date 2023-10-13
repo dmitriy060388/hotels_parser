@@ -42,35 +42,35 @@ def table_init(dbcon, scheme_name, create_table_name, logdb):
                 print (e)
     return
 
-def table_insert(dbcon, scheme_name, table_name, dbid, hotel_name, hotel_date, price, category, eat, logdb):
+def table_insert(dbcon, scheme_name, table_name, hotel_name, hotel_date, price, category, eat, logdb):
     try:
         cur = dbcon.cursor()
         cur.execute(
-            sql.SQL("insert into {scheme}.{table} (id, hotel_name, date, price, category, breakfast) overriding system value values (%s, %s, %s, %s, %s, %s);").format(
+            sql.SQL("insert into {scheme}.{table} (hotel_name, date, price, category, breakfast) overriding system value values (%s, %s, %s, %s, %s);").format(
             scheme=sql.Identifier(scheme_name),
-            table=sql.Identifier(table_name)),(dbid, hotel_name, hotel_date, price, category, eat))
+            table=sql.Identifier(table_name)),(hotel_name, hotel_date, price, category, eat))
     except psycopg2.Error as e:
             if logdb == "DEBUG":
                 print (e)
     return
 
-def table_check_last_id(dbcon, scheme_name, table_name):
-    try:
-        cur = dbcon.cursor()
-        # cur.execute("select id from mts_scheme.result order by id desc limit 1")
-        cur.execute(
-            sql.SQL("select id from {scheme}.{table} order by id desc limit 1").format(
-                 scheme=sql.Identifier(scheme_name),
-                 table=sql.Identifier(table_name)))
-        answer = cur.fetchone()
-        if answer is not None:
-            last_id = int(cur.fetchone()[0])
-        else:
-            last_id = 1
-    except psycopg2.Error as e:
-            if logdb == "DEBUG":
-                print (e)
-    return last_id
+# def table_check_last_id(dbcon, scheme_name, table_name):
+#     try:
+#         cur = dbcon.cursor()
+#         # cur.execute("select id from mts_scheme.result order by id desc limit 1")
+#         cur.execute(
+#             sql.SQL("select id from {scheme}.{table} order by id desc limit 1").format(
+#                  scheme=sql.Identifier(scheme_name),
+#                  table=sql.Identifier(table_name)))
+#         answer = cur.fetchone()
+#         if answer is not None:
+#             last_id = int(cur.fetchone())
+#         else:
+#             last_id = 1
+#     except psycopg2.Error as e:
+#             if logdb == "DEBUG":
+#                 print (e)
+#     return last_id
 
 
 # scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
