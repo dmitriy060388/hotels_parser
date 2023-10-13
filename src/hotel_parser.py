@@ -39,8 +39,10 @@ while x != 0:
         parser = Parser()
         parser.search_hotel(hotels[i], hotels[i])
         y = parser.parse_data()
+        print('****', y)
+        print(type(y))
         tabmaxid=tabmaxid + 1 + i #1
-        table_insert(conn, "mts_scheme", "result", tabmaxid, y, '2023-10-12', y, 'NULL', 'NULL', LOGGING) #1
+        table_insert(conn, "mts_scheme", "result", tabmaxid, y, '2023-10-13', y, 'NULL', 'NULL', LOGGING) #1
         time.sleep(5)
         parser.close_browser()
         x -= 1

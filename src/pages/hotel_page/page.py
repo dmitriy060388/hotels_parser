@@ -18,11 +18,11 @@ class HotelPage(BaseClass):
                 rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
                 # Все цены
                 for y in rooms_price:
-                    print(str(y.text))
+                    price = (str(y.text))
                 # Типы номеров
-                for y in rooms_card:
-                    print(str(y.text))
-                return rooms_card, rooms_price
+                for x in rooms_card:
+                    card = (str(y.text))
+                return price, card
             print(x)
             # rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
             rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
