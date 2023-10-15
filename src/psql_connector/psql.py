@@ -32,7 +32,7 @@ def table_init(dbcon, scheme_name, create_table_name, logdb):
     try:
         cur = dbcon.cursor()
         cur.execute(
-            sql.SQL("create table if not exists {scheme}.{table} (id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, hotel_name VARCHAR(200), date DATE, price VARCHAR(200), category VARCHAR(128), breakfast VARCHAR(200));").format(
+            sql.SQL("create table if not exists {scheme}.{table} (id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, hotel_name VARCHAR(300), date VARCHAR(200), price VARCHAR(200), category VARCHAR(300), breakfast VARCHAR(200));").format(
             scheme=sql.Identifier(scheme_name),
             table=sql.Identifier(create_table_name)))
         if logdb == "DEBUG":
