@@ -41,9 +41,9 @@ while x != 0:
         parser = Parser()
         parser.search_hotel(hotels[i], hotels[i])
         y = parser.parse_data()
-        # date = parser.get_date()
+        date = parser.get_date()
         # tabmaxid=tabmaxid + 1 #1
-        table_insert(conn, "mts_scheme", "result", hotels[i], "2023-10-15", y[1], y[0], 'NULL', LOGGING) #1
+        table_insert(conn, "mts_scheme", "result", hotels[i], date, y[1], y[0], 'NULL', LOGGING) #1
         time.sleep(5)
         parser.close_browser()
         x -= 1
