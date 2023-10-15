@@ -20,7 +20,7 @@ class HotelPage(BaseClass):
                 for y in rooms_price:
                     price = (str(y.text))
                 # Типы номеров
-                for x in rooms_card:
+                for y in rooms_card:
                     card = (str(y.text))
                 return price, card
             print(x)

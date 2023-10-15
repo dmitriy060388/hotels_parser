@@ -4,6 +4,7 @@ import time
 from pages.main_page.page import MainPage
 from pages.hotel_page.page import HotelPage
 from requirements.list_of_hotels import hotels
+from utils.days_generator import DaysGenerator
 
 import psycopg2 #1
 from psycopg2 import sql #1
@@ -16,7 +17,7 @@ from pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DB
 conn = psycopg2.connect(dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT) #1
 conn.autocommit = True #1
 
-class Parser(MainPage, HotelPage):
+class Parser(MainPage, HotelPage, DaysGenerator):
 
     def __init__(self):
         # self.hotel_name = hotel_name
@@ -40,10 +41,9 @@ while x != 0:
         parser = Parser()
         parser.search_hotel(hotels[i], hotels[i])
         y = parser.parse_data()
-        print('****', y)
-        print(type(y))
+        # date = parser.get_date()
         # tabmaxid=tabmaxid + 1 #1
-        table_insert(conn, "mts_scheme", "result", y, '2023-10-13', y, 'NULL', 'NULL', LOGGING) #1
+        table_insert(conn, "mts_scheme", "result", hotels[i], "2023-10-15", y[1], y[0], 'NULL', LOGGING) #1
         time.sleep(5)
         parser.close_browser()
         x -= 1
