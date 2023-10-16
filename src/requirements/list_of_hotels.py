@@ -5,6 +5,7 @@ hotels = ["Cosmos Paveletskaya Hotel",
           "Rosso Riva (Россо Рива)",
           "Арткорт Москва Центр отель (Кортъярд Марриотт Сити Центр)",
           "Select Hotel Paveletskaya (Селект Павелецкая)",
-          "Hampton by Hilton Moscow Rogozhsky Val (Хэмптон Хилтон Рогожский Вал)",
+          "Hampton by Hilton Moscow Rogozhsky Val "
+          "(Хэмптон Хилтон Рогожский Вал)",
           "Ibis Moscow Center Bakhrushina (Ибис Бахрушина)",
           "Holiday Tagansky (Холидей Таганский)"]
