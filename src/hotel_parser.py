@@ -43,7 +43,7 @@ while x != 0:
     for i in range(len(hotels)):
         parser = Parser()
         parser.search_hotel(hotels[i], hotels[i])
-        y = parser.parse_data()
+        parse_result = parser.parse_data()
         date = parser.get_date()
         table_insert(
             conn,
@@ -51,8 +51,8 @@ while x != 0:
             "result",
             hotels[i],
             date,
-            y[1],
-            y[0],
+            parse_result[1],
+            parse_result[0],
             'NULL',
             LOGGING
         )

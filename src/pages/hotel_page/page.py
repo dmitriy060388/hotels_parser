@@ -9,19 +9,19 @@ class HotelPage(BaseClass):
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
         try:
             self._wait_visible_element(HotelPageLocators.BUTTON_ROOM)
-            x = self._find_element(HotelPageLocators.BUTTON_ROOM).value_of_css_property('background-color')
-            if "rgba(255, 0, 50, 1)" in x:
+            button = self._find_element(HotelPageLocators.BUTTON_ROOM).value_of_css_property('background-color')
+            if "rgba(255, 0, 50, 1)" in button:
                 rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
                 rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
                 rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
                 # Все цены
-                for y in rooms_price:
-                    price = (str(y.text))
+                for rooms_prices in rooms_price:
+                    price = (str(rooms_prices.text))
                 # Типы номеров
-                for y in rooms_card:
-                    card = (str(y.text))
+                for rooms_cards in rooms_card:
+                    card = (str(rooms_cards.text))
                 return price, card
-            print(x)
+
             rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
             # Все цены
             for x in rooms_price:
