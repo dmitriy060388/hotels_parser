@@ -77,6 +77,16 @@ def table_insert(
         eat,
         logdb):
     try:
+        if hotel_date is None:
+            hotel_date = "date not found"
+        if price is None:
+            price = "price not found"
+        if category is None:
+            category = "категория номера не найдена"
+        if eat is None:
+            eat = "breakfast condition not found"
+        if hotel_name is None:
+            hotel_name = "hotel not found"
         cur = dbcon.cursor()
         cur.execute(
             sql.SQL(
