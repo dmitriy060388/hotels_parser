@@ -51,8 +51,8 @@ while x != 0:
             "result",
             hotels[i],
             date,
-            parse_result[1],
             parse_result[0],
+            parse_result[1],
             'NULL',
             LOGGING
         )
