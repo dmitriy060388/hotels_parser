@@ -46,9 +46,9 @@ def table_init(dbcon, scheme_name, create_table_name, logdb):
             sql.SQL(
                 "create table if not exists {scheme}.{table} "
                 "(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
-                "hotel_name VARCHAR(300), date VARCHAR(200), "
-                "price VARCHAR(200), "
-                "category VARCHAR(300), breakfast VARCHAR(200));"
+                "hotel_name VARCHAR(1000), date VARCHAR(1000), "
+                "price VARCHAR(1000), "
+                "category VARCHAR(1000), breakfast VARCHAR(1000));"
                 ).format(
                 scheme=sql.Identifier(scheme_name),
                 table=sql.Identifier(create_table_name)))
