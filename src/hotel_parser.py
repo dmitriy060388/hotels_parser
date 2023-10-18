@@ -51,8 +51,11 @@ while x != 0:
             "result",
             hotels[i],
             date,
-            str(parse_result["card"]),
-            str(parse_result["price"]),
+            str(
+                parse_result["card"]
+                ).replace("[", "").replace("]", "").replace("'", ""),
+            str(parse_result["price"]
+                ).replace("[", "").replace("]", "").replace("'", ""),
             'NULL',
             LOGGING
         )
