@@ -47,8 +47,8 @@ def table_init(dbcon, scheme_name, create_table_name, logdb):
                 "create table if not exists {scheme}.{table} "
                 "(id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
                 "hotel_name VARCHAR(1000), date VARCHAR(1000), "
-                "price VARCHAR(1000), "
-                "category VARCHAR(1000), breakfast VARCHAR(1000));"
+                "category VARCHAR(1000), "
+                "price VARCHAR(1000), breakfast VARCHAR(1000));"
                 ).format(
                 scheme=sql.Identifier(scheme_name),
                 table=sql.Identifier(create_table_name)))
@@ -72,17 +72,17 @@ def table_insert(
         table_name,
         hotel_name,
         hotel_date,
-        price,
         category,
+        price,
         eat,
         logdb):
     try:
         if hotel_date is None:
             hotel_date = "date not found"
-        if price is None:
-            price = "price not found"
         if category is None:
             category = "категория номера не найдена"
+        if price is None:
+            price = "price not found"
         if eat is None:
             eat = "breakfast condition not found"
         if hotel_name is None:
@@ -91,15 +91,15 @@ def table_insert(
         cur.execute(
             sql.SQL(
                 "insert into {scheme}.{table} "
-                "(hotel_name, date, price, category, breakfast) "
+                "(hotel_name, date, category, price, breakfast) "
                 "overriding system value values (%s, %s, %s, %s, %s);"
                 ).format(
                 scheme=sql.Identifier(scheme_name),
                 table=sql.Identifier(table_name)), (
                     hotel_name,
                     hotel_date,
-                    price,
                     category,
+                    price,
                     eat))
     except psycopg2.Error as e:
         if logdb == "DEBUG":
