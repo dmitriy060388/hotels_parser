@@ -32,5 +32,4 @@ class HotelPage(BaseClass):
             nothing = "Номера не найдены"
             result["price"] = nothing
             result["card"] = nothing
-            print(result)
             return result
