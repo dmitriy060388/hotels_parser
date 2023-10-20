@@ -1,6 +1,8 @@
 from pages.base import BaseClass
 from .locators import HotelPageLocators
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import TimeoutException
+from time import sleep
+from random import randint
 
 
 class HotelPage(BaseClass):
@@ -10,7 +12,9 @@ class HotelPage(BaseClass):
         result["price"] = []
         result["card"] = []
         self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
+        sleep(randint(2, 8))
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
+        sleep(randint(2, 8))
         try:
             self._wait_visible_element(HotelPageLocators.BUTTON_ROOM)
             button = self._find_element(

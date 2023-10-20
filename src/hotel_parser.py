@@ -1,7 +1,9 @@
 import undetected_chromedriver as uc
-import time
 import psycopg2
+from datetime import datetime  # ToDo удалить после изменения цикла на 30 дней
 
+from time import sleep
+from random import randint
 from pages.main_page.page import MainPage
 from pages.hotel_page.page import HotelPage
 from requirements.list_of_hotels import hotels
@@ -25,7 +27,6 @@ conn.autocommit = True
 class Parser(MainPage, HotelPage, DaysGenerator):
 
     def __init__(self):
-        # self.hotel_name = hotel_name
         self.driver = uc.Chrome(headless=False)
         self.driver.maximize_window()
         self.driver.delete_all_cookies()
@@ -39,6 +40,7 @@ class Parser(MainPage, HotelPage, DaysGenerator):
 scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
 table_init(conn, "mts_scheme", "result", LOGGING)
 x = 10
+start = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
 while x != 0:
     for i in range(len(hotels)):
         parser = Parser()
@@ -59,10 +61,13 @@ while x != 0:
             'NULL',
             LOGGING
         )
-        time.sleep(5)
+        sleep(randint(2, 8))
         parser.close_browser()
         x -= 1
-    time.sleep(15)
+    sleep(randint(10, 15))
+end = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
+execution_time = end - start  # ToDo удалить после изменения цикла на 30 дней
+print(execution_time)  # ToDo удалить после изменения цикла на 30 дней
 
 
 @property
