@@ -53,12 +53,20 @@ while x != 0:
             "result",
             hotels[i],
             date,
-            str(
-                parse_result["card"]
-                ).replace("[", "").replace("]", "").replace("'", ""),
-            str(parse_result["price"]
-                ).replace("[", "").replace("]", "").replace("'", ""),
-            'NULL',
+            str(parse_result["card"])
+            .replace("[", "")
+            .replace("]", "")
+            .replace("'", ""),
+            str(parse_result["price"])
+            .replace("[", "")
+            .replace("]", "")
+            .replace("'", ""),
+            str(parse_result["breakfast"])
+            .replace("[", "")
+            .replace("]", "")
+            .replace("'", "")
+            .replace("(", "")
+            .replace(")", ""),
             LOGGING
         )
         sleep(randint(2, 8))

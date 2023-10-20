@@ -11,6 +11,7 @@ class HotelPage(BaseClass):
         result = {}
         result["price"] = []
         result["card"] = []
+        result["breakfast"] = []
         self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
         sleep(randint(2, 8))
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
@@ -24,12 +25,16 @@ class HotelPage(BaseClass):
                 rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
                 rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
                 rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+                rooms_breakfast = self._find_elements(HotelPageLocators.ROOM_BREAKFAST)
                 # Все цены
                 for rooms_prices in rooms_price:
                     result["price"].append(rooms_prices.text)
                 # Типы номеров
                 for rooms_cards in rooms_card:
                     result["card"].append(rooms_cards.text)
+                # Завтрак
+                for rooms_breakfasts in rooms_breakfast:
+                    result["breakfast"].append(rooms_breakfasts.text)
                 return result
 
         except TimeoutException:
