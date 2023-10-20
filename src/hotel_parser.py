@@ -39,9 +39,9 @@ class Parser(MainPage, HotelPage, DaysGenerator):
 
 scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
 table_init(conn, "mts_scheme", "result", LOGGING)
-x = 10
+count_hotels = 10
 start = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
-while x != 0:
+while count_hotels != 0:
     for i in range(len(hotels)):
         parser = Parser()
         parser.search_hotel(hotels[i], hotels[i])
@@ -71,7 +71,7 @@ while x != 0:
         )
         sleep(randint(2, 8))
         parser.close_browser()
-        x -= 1
+        count_hotels -= 1
     sleep(randint(10, 15))
 end = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
 execution_time = end - start  # ToDo удалить после изменения цикла на 30 дней
