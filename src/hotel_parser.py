@@ -1,26 +1,32 @@
 import undetected_chromedriver as uc
-import time
+import psycopg2
+from datetime import datetime  # ToDo удалить после изменения цикла на 30 дней
 
+from time import sleep
+from random import randint
 from pages.main_page.page import MainPage
 from pages.hotel_page.page import HotelPage
 from requirements.list_of_hotels import hotels
 from utils.days_generator import DaysGenerator
+from psql_connector.psql import scheme_init
+from psql_connector.psql import table_init
+from psql_connector.psql import table_insert
+from pages.hotel_page.psql_connect import (DBNAME,
+                                           DBUSER,
+                                           DBPASSWORD,
+                                           DBHOST,
+                                           DBPORT,
+                                           LOGGING)
 
-import psycopg2 #1
-from psycopg2 import sql #1
-from psql_connector.psql import scheme_init #1
-from psql_connector.psql import table_init #1
-from psql_connector.psql import table_insert #1
-# from psql_connector.psql import table_check_last_id #1
-from pages.hotel_page.psql_connect import DBNAME, DBUSER, DBPASSWORD, DBHOST, DBPORT, LOGGING #1
+conn = psycopg2.connect(
+    dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT
+    )
+conn.autocommit = True
 
-conn = psycopg2.connect(dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT) #1
-conn.autocommit = True #1
 
 class Parser(MainPage, HotelPage, DaysGenerator):
 
     def __init__(self):
-        # self.hotel_name = hotel_name
         self.driver = uc.Chrome(headless=False)
         self.driver.maximize_window()
         self.driver.delete_all_cookies()
@@ -31,23 +37,49 @@ class Parser(MainPage, HotelPage, DaysGenerator):
         self.driver.quit()
 
 
-scheme_init(conn, "mts_scheme", DBUSER, LOGGING) #1
-table_init(conn, "mts_scheme", "result", LOGGING) #1
-# print(table_check_last_id(conn, "mts_scheme", "result"))
-# tabmaxid = table_check_last_id(conn, "mts_scheme", "result") + 1 #1
-x = 10
-while x != 0:
-    for i in range(len(hotels)):
+scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
+table_init(conn, "mts_scheme", "result", LOGGING)
+count_hotels = 10
+start = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
+while count_hotels != 0:
+    # Итерация по счетчику списка отелей
+    for hotel in range(len(hotels)):
+        # Итерация по позициям из списка
         parser = Parser()
-        parser.search_hotel(hotels[i], hotels[i])
-        y = parser.parse_data()
+        parser.search_hotel(hotels[hotel], hotels[hotel])
+        parse_result = parser.parse_data()
         date = parser.get_date()
-        # tabmaxid=tabmaxid + 1 #1
-        table_insert(conn, "mts_scheme", "result", hotels[i], date, y[1], y[0], 'NULL', LOGGING) #1
-        time.sleep(5)
+        table_insert(
+            conn,
+            "mts_scheme",
+            "result",
+            hotels[hotel],
+            date,
+            str(parse_result["card"])
+            .replace("[", "")
+            .replace("]", "")
+            .replace("'", ""),
+            str(parse_result["price"])
+            .replace("[", "")
+            .replace("]", "")
+            .replace("'", ""),
+            str(parse_result["breakfast"])
+            .replace("[", "")
+            .replace("]", "")
+            .replace("'", "")
+            .replace("(", "")
+            .replace(")", ""),
+            LOGGING
+        )
+        sleep(randint(2, 8))
         parser.close_browser()
-        x -= 1
-    time.sleep(15)
+        count_hotels -= 1
+        print(hotel)
+    sleep(randint(10, 15))
+end = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
+execution_time = end - start  # ToDo удалить после изменения цикла на 30 дней
+print(execution_time)  # ToDo удалить после изменения цикла на 30 дней
+
 
 @property
 def main_page(self):

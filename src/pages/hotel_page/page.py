@@ -1,60 +1,44 @@
 from pages.base import BaseClass
-from pages.main_page.page import MainPage
 from .locators import HotelPageLocators
 from selenium.common.exceptions import TimeoutException
-import time
+from time import sleep
+from random import randint
+
 
 class HotelPage(BaseClass):
 
     def parse_data(self):
+        result = {}
+        result["price"] = []
+        result["card"] = []
+        result["breakfast"] = []
         self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
+        sleep(randint(2, 8))
         self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
+        sleep(randint(2, 8))
         try:
             self._wait_visible_element(HotelPageLocators.BUTTON_ROOM)
-            x = self._find_element(HotelPageLocators.BUTTON_ROOM).value_of_css_property('background-color')
-            if "rgba(255, 0, 50, 1)" in x:
+            button = self._find_element(
+                HotelPageLocators.BUTTON_ROOM
+                ).value_of_css_property('background-color')
+            if "rgba(255, 0, 50, 1)" in button:
                 rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
                 rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
                 rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
+                rooms_breakfast = self._find_elements(HotelPageLocators.ROOM_BREAKFAST)
                 # Все цены
-                for y in rooms_price:
-                    price = (str(y.text))
+                for rooms_prices in rooms_price:
+                    result["price"].append(rooms_prices.text)
                 # Типы номеров
-                for y in rooms_card:
-                    card = (str(y.text))
-                return price, card
-            print(x)
-            # rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
-            rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
-            # Все цены
-            for x in rooms_price:
-                print(str(x.text))
-            # Типы номеров
-            for x in rooms_card:
-                print(str(x.text))
-        except:
-            result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
-            print(result)
+                for rooms_cards in rooms_card:
+                    result["card"].append(rooms_cards.text)
+                # Завтрак
+                for rooms_breakfasts in rooms_breakfast:
+                    result["breakfast"].append(rooms_breakfasts.text)
+                return result
 
-        # # Проверка на наличие предложений с отелями
-        # self._wait_visible_element(HotelPageLocators.CHOOSE_ROOMS)
-
-        # self._click_visible_element(HotelPageLocators.CHOOSE_ROOMS)
-        # try:
-        #     rooms_list = self._find_element(HotelPageLocators.ROOMS_LIST)
-        #     if self._find_elements(HotelPageLocators.ROOM_NAME1):
-        #         rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
-        #     else:
-        #         rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME2)
-        #     # rooms_card = self._find_elements(HotelPageLocators.ROOM_NAME1)
-        #     rooms_price = self._find_elements(HotelPageLocators.ROOM_PRICE)
-
-        #     # Все цены
-        #     for x in rooms_price:
-        #         print(str(x.text))
-        #     # Типы номеров
-        #     for x in rooms_card:
-        #         print(str(x.text))
-        # except:
-        #     result = self._find_element(HotelPageLocators.HOTEL_NOT_FOUND).text
-        #     print(result)
+        except TimeoutException:
+            nothing = "Номера не найдены"
+            result["price"] = nothing
+            result["card"] = nothing
+            return result
