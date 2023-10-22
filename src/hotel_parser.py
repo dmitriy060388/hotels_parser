@@ -42,16 +42,18 @@ table_init(conn, "mts_scheme", "result", LOGGING)
 count_hotels = 10
 start = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
 while count_hotels != 0:
-    for i in range(len(hotels)):
+    # Итерация по счетчику списка отелей
+    for hotel in range(len(hotels)):
+        # Итерация по позициям из списка
         parser = Parser()
-        parser.search_hotel(hotels[i], hotels[i])
+        parser.search_hotel(hotels[hotel], hotels[hotel])
         parse_result = parser.parse_data()
         date = parser.get_date()
         table_insert(
             conn,
             "mts_scheme",
             "result",
-            hotels[i],
+            hotels[hotel],
             date,
             str(parse_result["card"])
             .replace("[", "")
@@ -72,6 +74,7 @@ while count_hotels != 0:
         sleep(randint(2, 8))
         parser.close_browser()
         count_hotels -= 1
+        print(hotel)
     sleep(randint(10, 15))
 end = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
 execution_time = end - start  # ToDo удалить после изменения цикла на 30 дней
