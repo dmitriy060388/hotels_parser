@@ -8,7 +8,7 @@ from random import randint
 class MainPage(BaseClass):
 
     def search_hotel(self, hotel, data):
-        DaysGenerator.one_day_generate(self)
+        DaysGenerator.week_generate(self)
 
         self.hotel = hotel
         self.data = data
@@ -23,9 +23,9 @@ class MainPage(BaseClass):
         self._click_visible_element(MainPageLocators.DATE)
         sleep(randint(2, 8))
         self._click_visible_element(
-            MainPageLocators.CURRENT_DAY(self.current_date)
+            MainPageLocators.CURRENT_DAY(self.days_list[0])
         )
         sleep(randint(2, 8))
-        self._click_visible_element(MainPageLocators.NEXT_DAY(self.next_date))
+        self._click_visible_element(MainPageLocators.NEXT_DAY(self.days_list[1]))
         sleep(randint(2, 8))
         self._click_visible_element(MainPageLocators.SEARCH)
