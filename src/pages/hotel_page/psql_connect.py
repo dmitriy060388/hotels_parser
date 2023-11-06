@@ -4,3 +4,6 @@ DBPASSWORD = 'F9ut@R*_23M'
 DBHOST = 'localhost'
 DBPORT = '5432'
 LOGGING = "DEBUG"
+SCHEMENAME = "mts_test"
+TABLENAME = "result"
+
