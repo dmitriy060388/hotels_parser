@@ -16,7 +16,9 @@ from pages.hotel_page.psql_connect import (DBNAME,
                                            DBPASSWORD,
                                            DBHOST,
                                            DBPORT,
-                                           LOGGING)
+                                           LOGGING,
+                                           SCHEMENAME,
+                                           TABLENAME)
 
 conn = psycopg2.connect(
     dbname=DBNAME, user=DBUSER, password=DBPASSWORD, host=DBHOST, port=DBPORT
@@ -37,8 +39,8 @@ class Parser(MainPage, HotelPage, DaysGenerator):
         self.driver.quit()
 
 
-scheme_init(conn, "mts_scheme", DBUSER, LOGGING)
-table_init(conn, "mts_scheme", "result", LOGGING)
+scheme_init(conn, SCHEMENAME, DBUSER, LOGGING)
+table_init(conn, SCHEMENAME, TABLENAME, LOGGING)
 count_hotels = 10
 start = datetime.now()  # ToDo удалить после изменения цикла на 30 дней
 while count_hotels != 0:
@@ -51,8 +53,8 @@ while count_hotels != 0:
         date = parser.get_date()
         table_insert(
             conn,
-            "mts_scheme",
-            "result",
+            SCHEMENAME,
+            TABLENAME,
             hotels[hotel],
             date,
             str(parse_result["card"])

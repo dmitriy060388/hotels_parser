@@ -1,13 +1,9 @@
-DBNAME = 'mts_test_1'
-DBUSER = 'admcsm'
-DBPASSWORD = 'F9ut@R*_23M'
+DBNAME = 'db1'
+DBUSER = 'postgres'
+DBPASSWORD = 'P@ssw0rd!'
 DBHOST = 'localhost'
 DBPORT = '5432'
 LOGGING = "DEBUG"
+SCHEMENAME = "mts_test"
+TABLENAME = "result"
 
-# DBNAME='mts_test_1'
-# DBUSER='postgres'
-# DBPASSWORD='P@ssw0rd!'
-# DBHOST='localhost'
-# DBPORT='5432'
-# LOGGING = "DEBUG" # состояния: ERROR, DEBUG. В состоянии DEBUG в терминал будет попадать вывод из postgres
